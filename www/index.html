@@ -26,7 +26,7 @@
       <div class="content" style="text-align: center">
         <div style="text-align: center; margin-top: 30px;">
           <p>
-            <ons-input id="btag" modifier="underbar" placeholder="btag#1234" float></ons-input>
+            <ons-input id="btag" modifier="underbar" placeholder="btag#1234" value="Wize#21370" float></ons-input>
           </p>
           <p style="margin-top: 30px;">
             <ons-button onclick="verifyBtag()">Valid your BTag</ons-button>
@@ -44,9 +44,9 @@
         <div class="center">Stats</div>
       </ons-toolbar>
 
-      <div class="content" style="text-align: center">
-        <p>This is the second page.</p>
-        <ons-button id="pop-button">Pop page</ons-button>
+      <div class="content">
+        <ons-progress-circular indeterminate id="wait2" style="text-align:center;margin-top40%;"></ons-progress-circular>
+        <div id="dataRet"></div>
       </div>
     </ons-page>
   </ons-template>

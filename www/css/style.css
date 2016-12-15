@@ -1,17 +1,61 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600,700');
 
+@font-face {
+    font-family: "ow";
+    src: url(../font/big_noodle_titling_oblique.ttf) format("truetype");
+}
+
 .navigation-bar--material__center{
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
+  font-family: 'ow', sans-serif;
+  font-size: 30px;
 }
 
 .button--material{
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
+  font-family: 'ow', sans-serif;
+  font-size: 20px;
   width: 55%;
 }
 
 .text-input--material{
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
+}
+
+p{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  margin-top:5px;
+  margin-bottom: 5px;
+}
+
+.tcenter{
+  text-align: center;
+}
+
+.iconPlayer{
+  margin-top: 10px;
+  border-radius: 50%;
+}
+.iconRank{
+  width: 50px;
+}
+
+.divider{
+  width: 80%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+}
+.dividerSmall{
+  width: 40%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  margin-left: 10px;
+}
+
+.page--material__content h1, .page--material__content h2, .page--material__content h3, .page--material__content h4, .page--material__content h5{
+  font-family: 'ow', sans-serif;
+}
+
+.gridDiv{
+  padding: 10px;
+  display: inline-block;
 }
