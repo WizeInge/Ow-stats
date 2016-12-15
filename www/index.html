@@ -41,12 +41,54 @@
     <ons-page id="second-page">
       <ons-toolbar>
         <div class="left"><ons-back-button>Change Btag</ons-back-button></div>
-        <div class="center">Stats</div>
+        <div class="center" id="profileTitle"></div>
       </ons-toolbar>
 
       <div class="content">
-        <ons-progress-circular indeterminate id="wait2" style="text-align:center;margin-top40%;"></ons-progress-circular>
-        <div id="dataRet"></div>
+        <div id="dataRetProfile"></div>
+        <div class="tcenter" style="margin:30px 0 30px 0;" id="btnStats"></div>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page3.html">
+    <ons-page id="third-page">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">By Hero</div>
+      </ons-toolbar>
+
+      <div class="content">
+        <div id="dataRetHero">
+          <ons-list-header>Select a hero for more detail</ons-list-header>
+        </div>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page4.html">
+    <ons-page id="four-page">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Achievements</div>
+      </ons-toolbar>
+
+      <div class="content">
+        <div id="dataRetAchiev">
+        </div>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page5.html">
+    <ons-page id="five-page">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center" id="heroStatTitle"></div>
+      </ons-toolbar>
+
+      <div class="content">
+        <div id="dataRetHeroStats"></div>
       </div>
     </ons-page>
   </ons-template>
