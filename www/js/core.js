@@ -62,13 +62,15 @@ var construcPage2 = function(json){
       '<br />' +
       '<p>Playtime : ' + json.data.playtime.competitive + '</div>');
 
-      $('#btnStats').append('<ons-button onclick="getStatsHero()">Stats by Hero</ons-button><ons-button onclick="getAchiev()">Your achievements</ons-button>');
+      $('#btnStats').append('<ons-button onclick="getStatsHero()" id="statsBH">Stats by Hero</ons-button><ons-button onclick="getAchiev()">Your achievements</ons-button>');
   }, 500)
 };
 
 var getStatsHero = function(){
   var btag = document.getElementById('btag').value;
   var nBtag = btag.replace('#', '-');
+
+  $('#statsBH').prop("disabled", true);
 
   $.ajax({
     url: 'https://api.lootbox.eu/pc/eu/' + nBtag + '/competitive/heroes',
@@ -82,17 +84,24 @@ var getStatsHero = function(){
 
 var construcPage3 = function(json){
   setTimeout(function(){
-    var obj  = jQuery.parseJSON( json );
+    $('#statsBH').prop("disabled", false);
+    var obj = jQuery.parseJSON(json);
     var html = "";
     $.each(obj, function(key, value){
       if(obj[key].name == "Soldier: 76"){
         html += '<ons-list-item tappable onclick="getStatsFor(\'Soldier76\')">';
       }
-      else if(obj[key].name == "Torbjörn"){
+      else if(obj[key].name == "Torbj&#xF6;rn"){
         html += '<ons-list-item tappable onclick="getStatsFor(\'Torbjoern\')">';
       }
-      else if(obj[key].name == "Lúcio"){
+      else if(obj[key].name == "L&#xFA;cio"){
         html += '<ons-list-item tappable onclick="getStatsFor(\'Lucio\')">';
+      }
+      else if(obj[key].name == "McCree"){
+        html += '<ons-list-item tappable onclick="getStatsFor(\'Mccree\')">';
+      }
+      else if(obj[key].name == "D.Va"){
+        html += '<ons-list-item tappable onclick="getStatsFor(\'DVa\')">';
       }
       else{
         html += '<ons-list-item tappable onclick="getStatsFor(\'' + obj[key].name + '\')">';
@@ -124,14 +133,53 @@ var construcPage5 = function(json, hero){
   setTimeout(function(){
     $('ons-toolbar #heroStatTitle').append(hero);
 
-    $('#dataRetHeroStats').append();
+    var winrate = json[hero].GamesWon * 100 / json[hero].GamesPlayed;
+    winrate = Math.round(winrate * 100) / 100;
 
-    //TODO : Same in json = Eliminations; FinalBlows; SoloKills; DamageDone; ObjectiveKills; Multikills; EliminationsperLife; Eliminations-MostinLife;
-    //                      DamageDone-MostinLife; KillStreak-Best; DamageDone-MostinGame; Eliminations-MostinGame; FinalBlows-MostinGame;
-    //                      ObjectiveKills-MostinGame; ObjectiveTime-MostinGame; SoloKills-MostinGame; Deaths-Average; SoloKills-Average;
-    //                      ObjectiveTime-Average; ObjectiveKills-Average; FinalBlows-Average; Eliminations-Average; DamageDone-Average;
-    //                      Deaths; Medals-Bronze; Medals-Silver; Medals-Gold; TimePlayed; GamesPlayed; GamesWon; ObjectiveTime; TimeSpentonFire;
-    //                      WinPercentage (a faire soi même % chelou sur l'api = win * 100 / tot); Multikill-Best; GamesTied; GamesLost;
+    $('#five-page .navigation-bar--material').css('background-image', 'url(\'../img/' + hero + '.jpg\')');
+
+    $('#dataRetHeroStats').append('<div style="padding:10px;"><h1 class="tcenter">General</h1>' +
+        '<p>Eliminations : ' + json[hero].Eliminations + '</p>' +
+        '<p>Final blows : ' + json[hero].FinalBlows + '</p>' +
+        '<p>Solo kills : ' + json[hero].SoloKills + '</p>' +
+        '<p>Damage done : ' + json[hero].DamageDone + '</p>' +
+        '<p>Objective kills : ' + json[hero].ObjectiveKills + '</p>' +
+        '<p>Multikills (best) : ' + json[hero]["Multikill-Best"] + '</p>' +
+        '<p>Kill streak (best) : ' + json[hero]["KillStreak-Best"] + '</p>' +
+        '<p>Time spent on fire : ' + json[hero].TimeSpentonFire + '</p>' +
+        '<p>Objective time : ' + json[hero].ObjectiveTime + '</p>' +
+        '<p>Deaths : ' + json[hero].Deaths + '</p>' +
+        '<p>Time played : ' + json[hero].TimePlayed + '</p>' +
+        '<p>Games played : ' + json[hero].GamesPlayed + '</p>' +
+        '<p>Games won : ' + json[hero].GamesWon + '</p>' +
+        '<p>Games lost : ' + json[hero].GamesLost + '</p>' +
+        '<p>Games tied : ' + json[hero].GamesTied + '</p>' +
+        '<p>Win percentage : ' + winrate + '%</p>' +
+        '<h1 class="tcenter">Medals</h1>' +
+        '<p>Bronze : ' + json[hero]["Medals-Bronze"] + '</p>' +
+        '<p>Silver : ' + json[hero]["Medals-Silver"] + '</p>' +
+        '<p>Gold : ' + json[hero]["Medals-Gold"] + '</p>' +
+        '<h1 class="tcenter">Best in Game</h1>' +
+        '<p>Eliminations : ' + json[hero]["Eliminations-MostinGame"] + '</p>' +
+        '<p>Final blows : ' + json[hero]["FinalBlows-MostinGame"] + '</p>' +
+        '<p>Solo kills : ' + json[hero]["SoloKills-MostinGame"] + '</p>' +
+        '<p>Damage done : ' + json[hero]["DamageDone-MostinGame"] + '</p>' +
+        '<p>Objective kills : ' + json[hero]["ObjectiveKills-MostinGame"] + '</p>' +
+        '<p>Objective time : ' + json[hero]["ObjectiveTime-MostinGame"] + '</p>' +
+        '<h1 class="tcenter">Average</h1>' +
+        '<p>Eliminations per life : ' + json[hero].EliminationsperLife + '</p>' +
+        '<p>Eliminations most in life : ' + json[hero]["Eliminations-MostinLife"] + '</p>' +
+        '<p>Damage done most in life : ' + json[hero]["DamageDone-MostinLife"] + '</p>' +
+        '<p>Eliminations : ' + json[hero]["Eliminations-Average"] + '</p>' +
+        '<p>Final blows : ' + json[hero]["FinalBlows-Average"] + '</p>' +
+        '<p>Solo kills : ' + json[hero]["SoloKills-Average"] + '</p>' +
+        '<p>Damage done : ' + json[hero]["DamageDone-Average"] + '</p>' +
+        '<p>Objective kills : ' + json[hero]["ObjectiveKills-Average"] + '</p>' +
+        '<p>Objective time : ' + json[hero]["ObjectiveTime-Average"] + '</p>' +
+        '<p>Deaths : ' + json[hero]["Deaths-Average"] + '</p>' +
+        '</div>');
+
+    //TODO : Same in json = SoloKills-Average; DamageDone-Average; ObjectiveKills-Average; ObjectiveTime-Average; Deaths-Average;
 
   }, 500);
 }

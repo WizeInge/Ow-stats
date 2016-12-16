@@ -64,3 +64,12 @@ p{
   padding: 10px;
   display: inline-block;
 }
+
+#five-page .navigation-bar--material {
+  height: 230px;
+  background-size: cover;
+}
+
+#five-page .navigation-bar--material + .page__background + .page__content{
+  top: 231px
+}
